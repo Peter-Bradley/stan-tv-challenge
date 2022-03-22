@@ -23,9 +23,21 @@ const responsive = {
   }
 }
 
+function fetchValues() {
+  fetch('https://raw.githubusercontent.com/Wargamers117/tv-coding-challenge/master/data.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data) // Prints result from `response.json()` in getRequest
+  })
+  .catch(error => console.error(error))
+}
+
 function App() {
   return (
     <div className="App">
+      {
+      fetchValues()
+      }
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {/* <Counter />
