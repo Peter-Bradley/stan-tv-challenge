@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import { getPrograms } from './features/programs/programsSlice';
 import './App.css';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useAppDispatch } from './app/hooks'
 
 const responsive = {
   desktop: {
@@ -23,65 +25,17 @@ const responsive = {
   }
 }
 
-function fetchValues() {
-  fetch('https://raw.githubusercontent.com/Wargamers117/tv-coding-challenge/master/data.json')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data) // Prints result from `response.json()` in getRequest
-  })
-  .catch(error => console.error(error))
-}
-
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getPrograms())
+  }, [dispatch])
+
   return (
     <div className="App">
-      {
-      fetchValues()
-      }
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {/* <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload Routing XDD.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span> */}
       </header>
       <Carousel
       swipeable={false}
