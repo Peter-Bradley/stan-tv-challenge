@@ -7,22 +7,39 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const programs = useSelector((state: RootState) => state.programs.programList);
+  
   let navigate = useNavigate();
-  const routeChange = (routeId: number) =>{ 
-    let path = `${routeId}`; 
+  const routeChange = (routeId: number) => {
+    let path = `${routeId}`;
     navigate(path);
   }
 
-  const programsList = programs.map((program) =>
-  <li><img key={program.id.toString()} src={program.image} alt=':(' onClick={() => routeChange(program.id)}/></li>
-  );
+  document.onkeydown = function(e) {
+    switch(e.key) {
+      case "ArrowLeft":
+        console.log("Pressed Left :)")
+        break;
+      case "ArrowRight":
+        console.log("Pressed Right :)")
+        break;
+    }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <ul>{programsList}</ul>
+      <div className="divSearchResults carosuel-container">
+        <div className="carosuel-item-container"> {
+          programs.map((program) =>
+          <div className='single-item-container'>
+            <img key={program.id.toString()} className = "programImage" src={program.image} alt=':(' onClick={() => routeChange(program.id)} />
+          </div>
+          )
+        }
+        </div>
+      </div>
     </div>
   );
 }
