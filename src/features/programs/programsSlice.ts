@@ -5,10 +5,22 @@ export const getPrograms = createAsyncThunk('programs/getPrograms',async () => {
     return (await response.json())
 })
 
+interface ProgramInterface {
+    id: number;
+    title: string;
+    description: string;
+    type: string;
+    image: string;
+    rating: string;
+    genre: string;
+    year: number;
+    language: string;
+}
+
 export const programsSlice = createSlice({
     name: 'programs',
     initialState: {
-        programList: {},
+        programList: [] as ProgramInterface[],
         status: '',
     },
     extraReducers: (builder) => {
@@ -25,5 +37,7 @@ export const programsSlice = createSlice({
     },
     reducers: {}
 })
+
+//export const selectProgramById = (state: { programs: any[]; }, programId: any) => state.programs.find(((program: { id: any; }) => program.id === programId)
 
 export default programsSlice.reducer

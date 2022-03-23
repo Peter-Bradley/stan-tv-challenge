@@ -7,6 +7,9 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Program from './routes/program'
+import { getPrograms } from './features/programs/programsSlice';
+
+store.dispatch(getPrograms())
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +17,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path = "/" element={<App />} />
-          <Route path = "program" element={<Program />} />
+          <Route path = ":id" element={<Program />} />
         </Routes>
       </BrowserRouter>
     </Provider>
