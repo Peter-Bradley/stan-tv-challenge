@@ -1,3 +1,4 @@
+import './program.css';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { RootState } from "../app/store";
@@ -9,8 +10,8 @@ export default function Program() {
 
   if(program === undefined)
   {
-    return <h2>Loading :)</h2>
+    return <h2 className = "Test">Loading :)</h2>
   }
 
-  return <h2>Program: {program.title}</h2>;
+  return <h2 className = "Test">Program: {program.title}</h2>;
 }

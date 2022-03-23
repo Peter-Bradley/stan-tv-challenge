@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { useSelector } from 'react-redux'
@@ -25,12 +24,17 @@ function App() {
     }
   }
 
+  if(programs.length === 0)
+  {
+    return <h2>Loading :)</h2>
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <div className="divSearchResults carosuel-container">
+      <div className="carosuel-container">
         <div className="carosuel-item-container"> {
           programs.map((program) =>
           <div className='single-item-container'>
