@@ -17,7 +17,7 @@
 }
 
 .App-header {
-  min-height: 20vh;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -25,7 +25,19 @@
   font-size: calc(10px + 2vmin);
 }
 
-.programImage {
+/* .programImage {
+  height: 500px;
+  width: 390px;
+  border: 5px solid rgb(4, 0, 255);
+} */
+
+.selectedProgramImage {
+  height: 500px;
+  width: 390px;
+  border: 5px solid rgb(4, 0, 255);
+}
+
+.notSelectedProgramImage {
   height: 500px;
   width: 390px;
 }
@@ -35,15 +47,14 @@
   display: flex;
   align-items: center;
   overflow: visible;
-  margin-right: 60px;
+  margin: auto;
 }
 
 .carosuel-item-container {
   display: flex;
   overflow: visible;
   justify-content: center;
-  margin-left: 60px;
-  margin-right: 60px;
+  margin: auto;
 }
 
 .single-item-container {
@@ -52,4 +63,8 @@
   text-align: center;
   cursor: pointer;
   min-width: 10rem;
+}
+
+.hiddenCheck {
+  display: none;
 }
