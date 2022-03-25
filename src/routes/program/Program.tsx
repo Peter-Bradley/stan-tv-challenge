@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
+import Header from '../../features/header/Header';
 //import {selectProgramById} from '../features/programs/programsSlice'
 
 export default function Program() {
@@ -28,5 +29,10 @@ export default function Program() {
     return <h2 className = "Test">Loading :)</h2>
   }
 
-  return <h2 className = "Test">Program: {program.title}</h2>;
+  return (
+    <div>
+      <Header />
+      <h2 className = "Test">Program: {program.title}</h2>
+    </div>
+  );
 }
