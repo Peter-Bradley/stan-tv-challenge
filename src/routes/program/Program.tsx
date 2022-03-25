@@ -26,13 +26,21 @@ export default function Program() {
 
   if(program === undefined)
   {
-    return <h2 className = "Test">Loading :)</h2>
+    return (
+      <div>
+        <Header />
+        <h2 className = "Test">Spooky Scary Skeletons :O</h2>
+      </div>
+    );
   }
 
   return (
     <div>
       <Header />
-      <h2 className = "Test">Program: {program.title}</h2>
+      <img key={program.id} className='image' src={program.image} alt={program.title} />
+      <h1>{program.title}</h1>
+      <h2>{program.rating} | {program.year} | {program.genre} | {program.language}</h2>
+      <p className='description'>{program.description}</p>
     </div>
   );
 }

@@ -1,3 +1,28 @@
-.Test {
-    color: red;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.image {
+    height: 600px;
+    width: 420px;
+    float: left;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    font-size: 100%;
+    color: white;
+}
+
+h2 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 100%;
+    color: white;
+}
+
+.description {
+    font-family: "Open Sans", sans-serif;
+    color: white;
 }
