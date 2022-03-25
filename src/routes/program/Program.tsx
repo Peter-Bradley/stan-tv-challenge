@@ -1,7 +1,7 @@
-import './program.css';
+import './Program.css';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
-import { RootState } from "../app/store";
+import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
 //import {selectProgramById} from '../features/programs/programsSlice'
 

@@ -6,7 +6,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Program from './routes/program'
+import Program from './routes/program/Program'
 import { getPrograms } from './features/programs/programsSlice';
 
 store.dispatch(getPrograms())
