@@ -30,6 +30,19 @@ export function Carosuel() {
         navigate(path);
     }
 
+    function setSkeletonItems() {
+        let skeletonItems: any[] = [];
+        for (var i = 0; i < maxItems; i++) {
+            skeletonItems.push(<div className='single-item-container'> <SkeletonElement {...{ type: "program" } as any} /> </div>)
+        }
+        return skeletonItems;
+    }
+
+    function onLoadSetFocus() {
+        const box = document.getElementById('carosuel-container');
+        box?.focus();
+    }
+
     const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
         switch (event.key) {
             case "ArrowLeft":
@@ -78,31 +91,18 @@ export function Carosuel() {
         }
     };
 
-    function onLoadSetFocus() {
-        const box = document.getElementById('carosuel-container');
-        box?.focus();
-    }
-
-    function setSkeletonItems() {
-        let skeletonItems: any[] = [];
-        for (var i = 0; i < maxItems; i++) {
-            skeletonItems.push(<div className='single-item-container'> <SkeletonElement {...{ type: "program" } as any} /> </div>)
-        }
-        return skeletonItems;
-    }
-
     return (
-        <div id="carosuel-container" className="carosuel-container" onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
-            <div className="carosuel-item-container"> {
+        <div id="carosuel-container" className='carosuel-container' onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
+            <div className='carosuel-item-container'> {
                 currentPrograms && currentPrograms.length > 0 ? (
                     currentPrograms.map((program, index) =>
                         <div className='single-item-container'>
-                            <div className="hiddenCheck"> {
+                            <div className='hiddenCheck'> {
                                 selectedProgram === index ? (
                                     selectedProgramClass = "programImage selected",
                                     selectedProgramId = program.id
                                 ) : (
-                                    selectedProgramClass = "programImage"
+                                    selectedProgramClass = "programImage notselected"
                                 )}
                             </div>
                             <img key={program.id} className={`${selectedProgramClass}`} src={program.image} alt={program.title} />
