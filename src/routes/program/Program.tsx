@@ -31,7 +31,7 @@ export default function Program() {
   };
 
   return (
-    <div className="program-details" onLoad={() => [onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
+    <div id="program-details" className="program-details" onLoad={() => [onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
       <Header />{
         program ? (
           <div>
