@@ -1,4 +1,5 @@
 import './Program.css';
+import React from 'react';
 import { useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
@@ -16,31 +17,34 @@ export default function Program() {
     navigate(path);
   }
 
-  document.onkeydown = function (e) {
-    switch (e.key) {
+  function onLoadSetFocus() {
+    const box = document.getElementById('program-details');
+    box?.focus();
+}
+
+  const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    switch (event.key) {
       case "Backspace":
         routeChange()
         break;
     }
-  }
-
-  if(program === undefined)
-  {
-    return (
-      <div>
-        <Header />
-        <h2 className = "Test">Spooky Scary Skeletons :O</h2>
-      </div>
-    );
-  }
+  };
 
   return (
-    <div>
-      <Header />
-      <img key={program.id} className='image' src={program.image} alt={program.title} />
-      <h1>{program.title}</h1>
-      <h2>{program.rating} | {program.year} | {program.genre} | {program.language}</h2>
-      <p className='description'>{program.description}</p>
+    <div className="program-details" onLoad={() => [onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
+      <Header />{
+        program ? (
+          <div>
+            <img key={program.id} className='image' src={program.image} alt={program.title} />
+            <h1>{program.title}</h1>
+            <h2>{program.rating} | {program.year} | {program.genre} | {program.language}</h2>
+            <p className='description'>{program.description}</p>
+          </div>
+        ) : (
+          <div>
+            <h2 className="Test">Spooky Scary Skeletons :O</h2>
+          </div>
+          )}
     </div>
   );
 }

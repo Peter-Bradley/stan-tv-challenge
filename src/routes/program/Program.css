@@ -26,3 +26,16 @@ h2 {
     font-family: "Open Sans", sans-serif;
     color: white;
 }
+
+.program-details {
+    align-self: left;
+    display: flex;
+    align-items: left;
+    overflow: visible;
+    margin: auto;
+    position:static;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
