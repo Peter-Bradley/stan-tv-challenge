@@ -1,50 +1,41 @@
- /* .programImage {
-    height: 500px;
-    width: 390px;
-    border: 5px solid rgb(4, 0, 255);
-  } */
-  
-  .selectedProgramImage {
-    height: 500px;
-    width: 390px;
-    border: 5px solid rgb(4, 0, 255);
-    align-self: center;
-  }
-  
-  .notSelectedProgramImage {
-    height: 500px;
-    width: 390px;
-    align-self: center;
-  }
-  
-  .carosuel-container {
-    align-self: center;
-    display: flex;
-    align-items: center;
-    overflow: visible;
-    margin: auto;
-    position:absolute;
-    top:0px;
-    right:0px;
-    bottom:0px;
-    left:0px;
-  }
-  
-  .carosuel-item-container {
-    display: flex;
-    overflow: visible;
-    justify-content: center;
-    margin: auto;
-  }
-  
-  .single-item-container {
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
-    cursor: pointer;
-    min-width: 10rem;
-  }
-  
-  .hiddenCheck {
-    display: none;
-  }
+.programImage {
+  height: 500px;
+  width: 390px;
+  align-self: center;
+}
+
+.programImage.selected {
+  border: 5px solid rgb(4, 0, 255);
+}
+
+.carosuel-container {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  margin: auto;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+}
+
+.carosuel-item-container {
+  display: flex;
+  overflow: visible;
+  justify-content: center;
+  margin: auto;
+}
+
+.single-item-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  cursor: pointer;
+  min-width: 10rem;
+}
+
+.hiddenCheck {
+  display: none;
+}

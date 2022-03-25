@@ -4,19 +4,20 @@ import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
 import { ProgramInterface } from "../programs/programInterface"
+import SkeletonElement from "../../skeletons/SkeletonElement"
 
 let beginning: number = 0;
 let maxItems: number = 6;
 let ending: number = maxItems;
 let selectedProgramPosition: number = 0;
-let selectedProgramClass: string = "selectedProgramImage"
+let selectedProgramClass: string = "selected"
 let selectedProgramId: number = 0;
 
 export function Carosuel() {
     const programs = useSelector((state: RootState) => state.programs.programList);
     const [currentPrograms, setPrograms] = useState<ProgramInterface[]>();
     const [selectedProgram, changeSelectedProgram] = useState<Number>();
-    
+
     useEffect(() => {
         changeSelectedProgram(selectedProgramPosition);
         const displayedPrograms = programs.slice(beginning, ending);
@@ -27,10 +28,6 @@ export function Carosuel() {
     const routeChange = (routeId: number) => {
         let path = `${routeId}`;
         navigate(path);
-    }
-
-    if (programs.length === 0) {
-        return (<h2>Loading :)</h2>)
     }
 
     const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -81,30 +78,40 @@ export function Carosuel() {
         }
     };
 
-    function onLoadSet() {
+    function onLoadSetFocus() {
         const box = document.getElementById('carosuel-container');
         box?.focus();
     }
 
+    function setSkeletonItems() {
+        let skeletonItems: any[] = [];
+        for (var i = 0; i < maxItems; i++) {
+            skeletonItems.push(<div className='single-item-container'> <SkeletonElement {...{ type: "program" } as any} /> </div>)
+        }
+        return skeletonItems;
+    }
+
     return (
-        <div id="carosuel-container" className="carosuel-container" onLoad={() => [setPrograms, onLoadSet()]} onKeyDown={keyDownHandler} tabIndex={0}>
+        <div id="carosuel-container" className="carosuel-container" onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
             <div className="carosuel-item-container"> {
                 currentPrograms && currentPrograms.length > 0 ? (
                     currentPrograms.map((program, index) =>
                         <div className='single-item-container'>
                             <div className="hiddenCheck"> {
                                 selectedProgram === index ? (
-                                    selectedProgramClass = "selectedProgramImage",
+                                    selectedProgramClass = "programImage selected",
                                     selectedProgramId = program.id
                                 ) : (
-                                    selectedProgramClass = "notSelectedProgramImage"
+                                    selectedProgramClass = "programImage"
                                 )}
                             </div>
                             <img key={program.id} className={`${selectedProgramClass}`} src={program.image} alt={program.title} />
                         </div>
                     )
                 ) : (
-                    <h2>Nothing XD</h2>
+                    <> {
+                        setSkeletonItems()
+                    } </>
                 )}
             </div>
         </div>
