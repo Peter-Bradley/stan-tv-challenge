@@ -1,21 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { ProgramInterface } from './programInterface'
 
 export const getPrograms = createAsyncThunk('programs/getPrograms',async () => {
     const response = await fetch('https://raw.githubusercontent.com/Wargamers117/tv-coding-challenge/master/data.json')
     return (await response.json())
 })
-
-interface ProgramInterface {
-    id: number;
-    title: string;
-    description: string;
-    type: string;
-    image: string;
-    rating: string;
-    genre: string;
-    year: number;
-    language: string;
-}
 
 export const programsSlice = createSlice({
     name: 'programs',
