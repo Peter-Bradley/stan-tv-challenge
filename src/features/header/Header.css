@@ -12,4 +12,7 @@
     align-items: left;
     justify-content: center;
     font-size: calc(10px + 2vmin);
+    z-index: 9;
+    position: fixed;
+    margin: 0 auto;
   }
