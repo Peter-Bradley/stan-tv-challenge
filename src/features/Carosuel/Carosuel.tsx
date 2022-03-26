@@ -14,18 +14,18 @@ let selectedProgramClass: string = "selected"
 let selectedProgramId: number = 0;
 
 export function Carosuel() {
-    const programs = useSelector((state: RootState) => state.programs.programList);
-    const [currentPrograms, setPrograms] = useState<ProgramInterface[]>();
-    const [selectedProgram, changeSelectedProgram] = useState<Number>();
+    let programs = useSelector((state: RootState) => state.programs.programList);
+    let [currentPrograms, setPrograms] = useState<ProgramInterface[]>();
+    let [selectedProgram, changeSelectedProgram] = useState<Number>();
 
     useEffect(() => {
         changeSelectedProgram(selectedProgramPosition);
-        const displayedPrograms = programs.slice(beginning, ending);
+        let displayedPrograms = programs.slice(beginning, ending);
         setPrograms(displayedPrograms);
     }, [programs]);
 
     let navigate = useNavigate();
-    const routeChange = (routeId: number) => {
+    let routeChange = (routeId: number) => {
         let path = `${routeId}`;
         navigate(path);
     }
@@ -39,11 +39,11 @@ export function Carosuel() {
     }
 
     function onLoadSetFocus() {
-        const box = document.getElementById('carosuel-container');
+        let box = document.getElementById('carosuel-container');
         box?.focus();
     }
 
-    const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    let keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
         switch (event.key) {
             case "ArrowLeft":
                 if (selectedProgramPosition === 0) {

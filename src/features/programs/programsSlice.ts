@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { RootState } from '../../app/store'
 import { ProgramInterface } from './programInterface'
 
-export const getPrograms = createAsyncThunk('programs/getPrograms',async () => {
-    const response = await fetch('https://raw.githubusercontent.com/Wargamers117/tv-coding-challenge/master/data.json')
+export let getPrograms = createAsyncThunk('programs/getPrograms',async () => {
+    let response = await fetch('https://raw.githubusercontent.com/Wargamers117/tv-coding-challenge/master/data.json')
     return (await response.json())
 })
 
-export const programsSlice = createSlice({
+export let programsSlice = createSlice({
     name: 'programs',
     initialState: {
         programList: [] as ProgramInterface[],
@@ -27,6 +28,6 @@ export const programsSlice = createSlice({
     reducers: {}
 })
 
-//export const selectProgramById = (state: { programs: any[]; }, programId: any) => state.programs.find(((program: { id: any; }) => program.id === programId)
-
 export default programsSlice.reducer
+
+export let selectProgramById = (state: RootState, programId: Number) => state.programs.programList.find((programList: { id: Number }) => programList.id === programId)

@@ -5,24 +5,25 @@ import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
 import Header from '../../features/header/Header';
-//import {selectProgramById} from '../features/programs/programsSlice'
+import SkeletonElement from '../../skeletons/SkeletonElement';
+import {selectProgramById} from '../../features/programs/programsSlice'
 
 export default function Program() {
   let params = useParams();
-  const program = useSelector((state: RootState) => state.programs.programList.find(o => (o.id) === Number(params.id)));
+  let program = useSelector((state: RootState) => selectProgramById(state, Number(params.id)));
 
   let navigate = useNavigate();
-  const routeChange = () => {
+  let routeChange = () => {
     let path = "/";
     navigate(path);
   }
 
   function onLoadSetFocus() {
-    const box = document.getElementById('container');
+    let box = document.getElementById('container');
     box?.focus();
   }
 
-  const keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  let keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
     switch (event.key) {
       case "Backspace":
         routeChange()
@@ -46,8 +47,15 @@ export default function Program() {
             </div>
           </div>
         ) : (
-          <div>
-            <h2 className="Test">Spooky Scary Skeletons :O</h2>
+          <div className="program-details">
+            <div className='image-col'>
+              <SkeletonElement {...{ type: "program" } as any} />
+            </div>
+            <div className='text-col'>
+              <SkeletonElement {...{ type: "title" } as any} />
+              <SkeletonElement {...{ type: "information" } as any} />
+              <SkeletonElement {...{ type: "description" } as any} />
+            </div>
           </div>
         )}
     </div>
