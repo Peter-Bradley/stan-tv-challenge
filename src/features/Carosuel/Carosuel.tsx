@@ -34,8 +34,8 @@ display: flex;
 overflow: visible;
 justify-content: center;
 margin: auto;
-padding-left: 60px;
-padding-right: 60px;`
+padding-left: 3%;
+padding-right: 3%;`
 
 let SingleItemContainer = styled.div`
 padding-left: 10px;
@@ -43,7 +43,10 @@ padding-right: 10px;`
 
 let ErrorMessage = styled.h1`
 font-family: "Open Sans", sans-serif;
-color: white;`
+color: white;
+position: absolute;
+top: 25%;
+left: 3%;`
 
 let beginning: number = 0;
 let maxItems: number = 6;
@@ -68,17 +71,24 @@ export function Carosuel() {
         navigate(path);
     }
 
+    function error(): boolean {
+        if (programsValues.status === "rejected") {
+            return true;
+        }
+        return false;
+    }
+
+    function onLoadSetFocus() {
+        let box: HTMLElement | null = document.getElementById('carosuel-container');
+        box?.focus();
+    }
+
     function setSkeletonItems() {
         let skeletonItems: any[] = [];
         for (var i = 0; i < maxItems; i++) {
             skeletonItems.push(<SingleItemContainer> <SkeletonElement {...{ type: "program" } as any} /> </SingleItemContainer>)
         }
         return skeletonItems;
-    }
-
-    function onLoadSetFocus() {
-        let box: HTMLElement | null = document.getElementById('carosuel-container');
-        box?.focus();
     }
 
     let keyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -128,13 +138,6 @@ export function Carosuel() {
                 break;
         }
     };
-
-    function error(): boolean {
-        if (programsValues.status === "rejected") {
-            return true;
-        }
-        return true;
-    }
 
     return (
         <CarosuelContainer id="carosuel-container" onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}> {

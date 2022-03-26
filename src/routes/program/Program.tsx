@@ -62,17 +62,30 @@ let Description = styled.p`
   font-family: "Open Sans", sans-serif;
   color: white;`
 
-let error: boolean = false;
+let ErrorMessage = styled.h1`
+font-family: "Open Sans", sans-serif;
+color: white;
+position: absolute;
+top: 25%;
+left: 3%;`
 
 export default function Program() {
   let params: Readonly<Params<string>> = useParams();
   let program = useSelector((state: RootState) => selectProgramById(state, Number(params.id)));
+  let status = useSelector((state: RootState) => state.programs.status)
 
   let navigate = useNavigate();
   let routeChange = () => {
     let path = "/";
     navigate(path);
   }
+
+  function error(): boolean {
+    if (status === "rejected") {
+        return true;
+    }
+    return false;
+}
 
   function onLoadSetFocus() {
     let box = document.getElementById('ProgramContainer');
@@ -89,32 +102,36 @@ export default function Program() {
 
   return (
     <div>
-      <Header />
-      <ProgramContainer id="ProgramContainer" tabIndex={0} onLoad={() => [onLoadSetFocus()]} onKeyDown={keyDownHandler}>{
-        program ? (
-          <ProgramDetails>
-            <ImageColumn>
-              <Image key={program.id} src={program.image} alt={program.title} />
-            </ImageColumn>
-            <TextColumn>
-              <Title>{program.title}</Title>
-              <Details>{program.rating} | {program.year} | {program.genre} | {program.language}</Details>
-              <Description>{program.description}</Description>
-            </TextColumn>
-          </ProgramDetails>
+      <Header />{
+        !error() ? (
+          <ProgramContainer id="ProgramContainer" tabIndex={0} onLoad={() => [onLoadSetFocus()]} onKeyDown={keyDownHandler}>{
+            program ? (
+              <ProgramDetails>
+                <ImageColumn>
+                  <Image key={program.id} src={program.image} alt={program.title} />
+                </ImageColumn>
+                <TextColumn>
+                  <Title>{program.title}</Title>
+                  <Details>{program.rating} | {program.year} | {program.genre} | {program.language}</Details>
+                  <Description>{program.description}</Description>
+                </TextColumn>
+              </ProgramDetails>
+            ) : (
+              <ProgramDetails>
+                <ImageColumn>
+                  <SkeletonElement {...{ type: "program" } as any} />
+                </ImageColumn>
+                <TextColumn>
+                  <SkeletonElement {...{ type: "title" } as any} />
+                  <SkeletonElement {...{ type: "information" } as any} />
+                  <SkeletonElement {...{ type: "description" } as any} />
+                </TextColumn>
+              </ProgramDetails>
+            )}
+          </ProgramContainer>
         ) : (
-          <ProgramDetails>
-            <ImageColumn>
-              <SkeletonElement {...{ type: "program" } as any} />
-            </ImageColumn>
-            <TextColumn>
-              <SkeletonElement {...{ type: "title" } as any} />
-              <SkeletonElement {...{ type: "information" } as any} />
-              <SkeletonElement {...{ type: "description" } as any} />
-            </TextColumn>
-          </ProgramDetails>
+          <ErrorMessage>An unknown error occured :(. Please try again later.</ErrorMessage>
         )}
-      </ProgramContainer>
     </div>
   );
 }
