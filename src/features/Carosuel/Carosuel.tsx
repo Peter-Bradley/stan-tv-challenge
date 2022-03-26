@@ -2,7 +2,7 @@ import './Carosuel.css';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { ProgramInterface } from "../programs/programInterface"
 import SkeletonElement from "../../skeletons/SkeletonElement"
 
@@ -14,17 +14,17 @@ let selectedProgramClass: string = "selected"
 let selectedProgramId: number = 0;
 
 export function Carosuel() {
-    let programs = useSelector((state: RootState) => state.programs.programList);
+    let programsValues: {programList: ProgramInterface[]; status: String} = useSelector((state: RootState) => state.programs);
     let [currentPrograms, setPrograms] = useState<ProgramInterface[]>();
     let [selectedProgram, changeSelectedProgram] = useState<Number>();
 
     useEffect(() => {
         changeSelectedProgram(selectedProgramPosition);
-        let displayedPrograms = programs.slice(beginning, ending);
+        let displayedPrograms = programsValues.programList.slice(beginning, ending);
         setPrograms(displayedPrograms);
-    }, [programs]);
+    }, [programsValues]);
 
-    let navigate = useNavigate();
+    let navigate: NavigateFunction = useNavigate();
     let routeChange = (routeId: number) => {
         let path = `${routeId}`;
         navigate(path);
@@ -39,7 +39,7 @@ export function Carosuel() {
     }
 
     function onLoadSetFocus() {
-        let box = document.getElementById('carosuel-container');
+        let box: HTMLElement | null = document.getElementById('carosuel-container');
         box?.focus();
     }
 
@@ -53,37 +53,37 @@ export function Carosuel() {
                     }
                     if (ending > maxItems)
                         ending -= maxItems;
-                    setPrograms(programs.slice(beginning, ending));
+                    setPrograms(programsValues.programList.slice(beginning, ending));
                 }
                 if (selectedProgramPosition !== 0)
                     changeSelectedProgram(selectedProgramPosition -= 1);
                 break;
             case "ArrowRight":
                 if (selectedProgramPosition === maxItems - 1) {
-                    if (beginning < programs.length - maxItems) {
+                    if (beginning < programsValues.programList.length - maxItems) {
                         beginning += maxItems;
                         selectedProgramPosition = -1;
                     }
-                    if (ending < programs.length)
+                    if (ending < programsValues.programList.length)
                         ending += maxItems;
-                    setPrograms(programs.slice(beginning, ending));
+                    setPrograms(programsValues.programList.slice(beginning, ending));
                 }
                 if (selectedProgramPosition < maxItems - 1)
                     changeSelectedProgram(selectedProgramPosition += 1);
                 break;
             case "ArrowUp":
-                if (beginning < programs.length - maxItems)
+                if (beginning < programsValues.programList.length - maxItems)
                     beginning += maxItems;
-                if (ending < programs.length)
+                if (ending < programsValues.programList.length)
                     ending += maxItems;
-                setPrograms(programs.slice(beginning, ending));
+                setPrograms(programsValues.programList.slice(beginning, ending));
                 break;
             case "ArrowDown":
                 if (beginning > 0)
                     beginning -= maxItems;
                 if (ending > maxItems)
                     ending -= maxItems;
-                setPrograms(programs.slice(beginning, ending));
+                setPrograms(programsValues.programList.slice(beginning, ending));
                 break;
             case "Enter":
                 routeChange(selectedProgramId);
@@ -91,29 +91,43 @@ export function Carosuel() {
         }
     };
 
+     function error(): boolean {
+        if(programsValues.status === "rejected")
+        {
+            return true;
+        }
+        return false;
+    }
+
     return (
         <div id="carosuel-container" className='carosuel-container' onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
-            <div className='carosuel-item-container'> {
-                currentPrograms && currentPrograms.length > 0 ? (
-                    currentPrograms.map((program, index) =>
-                        <div className='single-item-container'>
-                            <div className='hiddenCheck'> {
-                                selectedProgram === index ? (
-                                    selectedProgramClass = "programImage selected",
-                                    selectedProgramId = program.id
-                                ) : (
-                                    selectedProgramClass = "programImage notselected"
-                                )}
-                            </div>
-                            <img key={program.id} className={`${selectedProgramClass}`} src={program.image} alt={program.title} />
-                        </div>
-                    )
+            {
+                !error() ? (
+                    <div className='carosuel-item-container'> {
+                        currentPrograms && currentPrograms.length > 0 ? (
+                            currentPrograms.map((program, index) =>
+                                <div className='single-item-container'>
+                                    <div className='hiddenCheck'> {
+                                        selectedProgram === index ? (
+                                            selectedProgramClass = "programImage selected",
+                                            selectedProgramId = program.id
+                                        ) : (
+                                            selectedProgramClass = "programImage notselected"
+                                        )}
+                                    </div>
+                                    <img key={program.id} className={`${selectedProgramClass}`} src={program.image} alt={program.title} />
+                                </div>
+                            )
+                        ) : (
+                            <> {
+                                setSkeletonItems()
+                            } </>
+                        )}
+                    </div>
                 ) : (
-                    <> {
-                        setSkeletonItems()
-                    } </>
-                )}
-            </div>
+                    <h1>An unknown error occured :(. Please try again later.</h1>
+                )
+            }
         </div>
     );
 }
