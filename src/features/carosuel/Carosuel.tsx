@@ -41,6 +41,10 @@ let SingleItemContainer = styled.div`
 padding-left: 10px;
 padding-right: 10px;`
 
+let Hidden = styled.div`
+display: none;
+`
+
 let ErrorMessage = styled.h1`
 font-family: "Open Sans", sans-serif;
 color: rgb(96, 96, 96);
@@ -147,7 +151,12 @@ export function Carosuel() {
                         currentPrograms.map((program, index) =>
                             <SingleItemContainer> {
                                 selectedProgram === index ? (
-                                    <><SelectedProgram key={program.id} src={program.image} alt={program.title} /> {selectedProgramId = program.id}</>
+                                    <>
+                                        <SelectedProgram key={program.id} src={program.image} alt={program.title} /> 
+                                        <Hidden> {
+                                            selectedProgramId = program.id
+                                        } </Hidden>
+                                    </>
                                 ) : (
                                     <NotSelectedProgram key={program.id} src={program.image} alt={program.title} />
                                 )}
