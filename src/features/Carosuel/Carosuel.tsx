@@ -1,16 +1,54 @@
-import './Carosuel.css';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { ProgramInterface } from "../programs/programInterface"
 import SkeletonElement from "../../skeletons/SkeletonElement"
+import styled from 'styled-components';
+import "@fontsource/open-sans";
+
+let NotSelectedProgram = styled.img`
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    max-height: 600px;
+    align-self: center;`
+
+let SelectedProgram = styled(NotSelectedProgram)`
+border: 5px solid rgb(48, 150, 234);`
+
+let CarosuelContainer = styled.div`
+align-self: center;
+display: flex;
+align-items: center;
+overflow: visible;
+margin: auto;
+position:absolute;
+top:0px;
+right:0px;
+bottom:0px;
+left:0px;`
+
+let CarosuelItemContainer = styled.div`
+display: flex;
+overflow: visible;
+justify-content: center;
+margin: auto;
+padding-left: 60px;
+padding-right: 60px;`
+
+let SingleItemContainer = styled.div`
+padding-left: 10px;
+padding-right: 10px;`
+
+let ErrorMessage = styled.h1`
+font-family: "Open Sans", sans-serif;
+color: white;`
 
 let beginning: number = 0;
 let maxItems: number = 6;
 let ending: number = maxItems;
 let selectedProgramPosition: number = 0;
-let selectedProgramClass: string = "selected"
 let selectedProgramId: number = 0;
 
 export function Carosuel() {
@@ -33,7 +71,7 @@ export function Carosuel() {
     function setSkeletonItems() {
         let skeletonItems: any[] = [];
         for (var i = 0; i < maxItems; i++) {
-            skeletonItems.push(<div className='single-item-container'> <SkeletonElement {...{ type: "program" } as any} /> </div>)
+            skeletonItems.push(<SingleItemContainer> <SkeletonElement {...{ type: "program" } as any} /> </SingleItemContainer>)
         }
         return skeletonItems;
     }
@@ -91,43 +129,37 @@ export function Carosuel() {
         }
     };
 
-     function error(): boolean {
-        if(programsValues.status === "rejected")
-        {
+    function error(): boolean {
+        if (programsValues.status === "rejected") {
             return true;
         }
-        return false;
+        return true;
     }
 
     return (
-        <div id="carosuel-container" className='carosuel-container' onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}>
-            {
-                !error() ? (
-                    <div className='carosuel-item-container'> {
-                        currentPrograms && currentPrograms.length > 0 ? (
-                            currentPrograms.map((program, index) =>
-                                <div className='single-item-container'>
-                                    <div className='hiddenCheck'> {
-                                        selectedProgram === index ? (
-                                            selectedProgramClass = "programImage selected",
-                                            selectedProgramId = program.id
-                                        ) : (
-                                            selectedProgramClass = "programImage notselected"
-                                        )}
-                                    </div>
-                                    <img key={program.id} className={`${selectedProgramClass}`} src={program.image} alt={program.title} />
-                                </div>
-                            )
-                        ) : (
-                            <> {
-                                setSkeletonItems()
-                            } </>
-                        )}
-                    </div>
-                ) : (
-                    <h1>An unknown error occured :(. Please try again later.</h1>
-                )
-            }
-        </div>
+        <CarosuelContainer id="carosuel-container" onLoad={() => [setPrograms, onLoadSetFocus()]} onKeyDown={keyDownHandler} tabIndex={0}> {
+            !error() ? (
+                <CarosuelItemContainer> {
+                    currentPrograms && currentPrograms.length > 0 ? (
+                        currentPrograms.map((program, index) =>
+                            <SingleItemContainer> {
+                                selectedProgram === index ? (
+                                    <><SelectedProgram key={program.id} src={program.image} alt={program.title} /> {selectedProgramId = program.id}</>
+                                ) : (
+                                    <NotSelectedProgram key={program.id} src={program.image} alt={program.title} />
+                                )}
+                            </SingleItemContainer>
+                        )
+                    ) : (
+                        <> {
+                            setSkeletonItems()
+                        } </>
+                    )}
+                </CarosuelItemContainer>
+            ) : (
+                <ErrorMessage>An unknown error occured :(. Please try again later.</ErrorMessage>
+            )
+        }
+        </CarosuelContainer>
     );
 }
