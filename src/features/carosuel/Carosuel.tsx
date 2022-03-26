@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { ProgramInterface } from "../programs/programInterface"
+import { ProgramsInterface } from "../programs/programsInterface"
 import SkeletonElement from "../../skeletons/SkeletonElement"
 import styled from 'styled-components';
 import "@fontsource/open-sans";
@@ -59,8 +59,8 @@ let selectedProgramPosition: number = 0;
 let selectedProgramId: number = 0;
 
 export function Carosuel() {
-    let programsValues: { programList: ProgramInterface[]; status: String } = useSelector((state: RootState) => state.programs);
-    let [currentPrograms, setPrograms] = useState<ProgramInterface[]>();
+    let programsValues: { programList: ProgramsInterface[]; status: String } = useSelector((state: RootState) => state.programs);
+    let [currentPrograms, setPrograms] = useState<ProgramsInterface[]>();
     let [selectedProgram, changeSelectedProgram] = useState<Number>();
 
     useEffect(() => {

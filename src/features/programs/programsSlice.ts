@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { ProgramInterface } from './programInterface'
+import { ProgramsInterface } from './programsInterface'
 
 export let getPrograms = createAsyncThunk('programs/getPrograms',async () => {
     let response = await fetch('https://raw.githubusercontent.com/StreamCo/tv-coding-challenge/master/data.json')
@@ -10,7 +10,7 @@ export let getPrograms = createAsyncThunk('programs/getPrograms',async () => {
 export let programsSlice = createSlice({
     name: 'programs',
     initialState: {
-        programList: [] as ProgramInterface[],
+        programList: [] as ProgramsInterface[],
         status: '',
     },
     extraReducers: (builder) => {
