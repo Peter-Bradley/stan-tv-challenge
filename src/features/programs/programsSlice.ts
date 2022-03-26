@@ -3,7 +3,7 @@ import { RootState } from '../../app/store'
 import { ProgramInterface } from './programInterface'
 
 export let getPrograms = createAsyncThunk('programs/getPrograms',async () => {
-    let response = await fetch('https://raw.githubusercontent.com/Wargamers117/tv-coding-challenge/master/data.json')
+    let response = await fetch('https://raw.githubusercontent.com/StreamCo/tv-coding-challenge/master/data.json')
     return (await response.json())
 })
 
