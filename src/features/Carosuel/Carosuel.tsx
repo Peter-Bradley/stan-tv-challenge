@@ -43,7 +43,7 @@ padding-right: 10px;`
 
 let ErrorMessage = styled.h1`
 font-family: "Open Sans", sans-serif;
-color: white;
+color: rgb(96, 96, 96);
 position: absolute;
 top: 25%;
 left: 3%;`
