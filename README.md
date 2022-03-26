@@ -43,6 +43,19 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+Getting started with application
+- Get Latest Version of NodeJS
+- Get Lastest Version of Git
+- Open a Command Window
+- Clone repository via `git clone https://github.com/Wargamers117/stan-tv-challenge.git`
+- Enter into the cloned folder in the command window via `cd stan-tv-challenge`
+- run `npm install` in the command window
+- run `npm start` in the command window
+
+The application will now start a local instance of the application at [http://localhost:3000](http://localhost:3000)
+
+Technical Architecture Decisions
+
 Additional Features Liked to Implement
 - Selecting types of programs displayed via links on top of screen
 
