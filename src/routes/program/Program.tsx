@@ -82,10 +82,10 @@ export default function Program() {
 
   function error(): boolean {
     if (status === "rejected") {
-        return true;
+      return true;
     }
     return false;
-}
+  }
 
   function onLoadSetFocus() {
     let box = document.getElementById('ProgramContainer');

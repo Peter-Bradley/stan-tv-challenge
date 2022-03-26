@@ -55,7 +55,7 @@ let selectedProgramPosition: number = 0;
 let selectedProgramId: number = 0;
 
 export function Carosuel() {
-    let programsValues: {programList: ProgramInterface[]; status: String} = useSelector((state: RootState) => state.programs);
+    let programsValues: { programList: ProgramInterface[]; status: String } = useSelector((state: RootState) => state.programs);
     let [currentPrograms, setPrograms] = useState<ProgramInterface[]>();
     let [selectedProgram, changeSelectedProgram] = useState<Number>();
 
