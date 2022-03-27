@@ -102,7 +102,7 @@ export default function Program() {
 
   return (
     <div>
-      <Header />{
+      {
         !error() ? (
           <ProgramContainer id="ProgramContainer" tabIndex={0} onLoad={() => [onLoadSetFocus()]} onKeyDown={keyDownHandler}>{
             program ? (
