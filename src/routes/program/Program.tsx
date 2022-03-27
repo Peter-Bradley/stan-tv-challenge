@@ -107,7 +107,7 @@ export default function Program() {
             program ? (
               <ProgramDetails>
                 <ImageColumn>
-                  <Image key={program.id} src={program.image} alt={program.title} />
+                  <Image key={program.id} src={program.image} alt="Program Image" />
                 </ImageColumn>
                 <TextColumn>
                   <Title>{program.title}</Title>
@@ -116,7 +116,7 @@ export default function Program() {
                 </TextColumn>
               </ProgramDetails>
             ) : (
-              <ProgramDetails>
+              <ProgramDetails data-testid="Skeleton">
                 <ImageColumn>
                   <SkeletonElement {...{ type: "program" } as any} />
                 </ImageColumn>

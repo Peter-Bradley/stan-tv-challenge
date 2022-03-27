@@ -2,9 +2,7 @@
 import React, { FC } from 'react'
 import { render as rtlRender } from '@testing-library/react'
 import { Provider } from 'react-redux'
-// Import your own reducer
-import Carosuel from './Carosuel'
-import { store as currentStore } from '../../app/store'
+import { store as currentStore } from './app/store'
 
 function render(
   ui: any,
@@ -14,7 +12,7 @@ function render(
   } = {}
 ) {
   function Wrapper() {
-    return <Provider store={store}><Carosuel/></Provider>
+    return <Provider store={store}>{ui}</Provider>
   }
   return rtlRender(ui, { wrapper: Wrapper as FC, ...renderOptions })
 }
@@ -22,4 +20,4 @@ function render(
 // re-export everything
 export * from '@testing-library/react'
 // override render method
-export { render }
+export {render}
