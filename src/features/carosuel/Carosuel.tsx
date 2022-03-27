@@ -79,9 +79,7 @@ export default function Carosuel() {
     }
 
     function setSkeletonItems() {
-        //console.log(programsValues.status);
         let skeletonItems: any[] = [];
-        skeletonItems.push(<div>Status: {programsValues.status}</div>)
         for (var i = 0; i < maxItems; i++) {
             skeletonItems.push(<SingleItemContainer> <SkeletonElement {...{ type: "program" } as any} /> </SingleItemContainer>)
         }
@@ -113,7 +111,10 @@ export default function Carosuel() {
                         ending += maxItems;
                     setPrograms(programsValues.programList.slice(beginning, ending));
                 }
-                if (selectedProgramPosition < maxItems - 1)
+
+                let comparisonValue = currentPrograms?.length ?? maxItems
+
+                if (selectedProgramPosition < comparisonValue - 1)
                     changeSelectedProgram(selectedProgramPosition += 1);
                 break;
             case "ArrowUp":
