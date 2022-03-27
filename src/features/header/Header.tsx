@@ -19,7 +19,7 @@ let AppLogo = styled.img`
 function Header() {
     return (
         <AppHeader>
-          <AppLogo src={logo} alt="Stan" />
+          <AppLogo src={logo} alt="Stan Logo" />
         </AppHeader>
     );
   }

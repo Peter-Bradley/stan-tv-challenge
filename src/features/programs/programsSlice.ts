@@ -11,7 +11,7 @@ export let programsSlice = createSlice({
     name: 'programs',
     initialState: {
         programList: [] as ProgramsInterface[],
-        status: '',
+        status: 'idle',
     },
     extraReducers: (builder) => {
         builder.addCase(getPrograms.pending, (state, action) => {
