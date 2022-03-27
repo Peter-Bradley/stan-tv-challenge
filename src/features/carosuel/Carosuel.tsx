@@ -41,10 +41,6 @@ let SingleItemContainer = styled.div`
 padding-left: 10px;
 padding-right: 10px;`
 
-let Hidden = styled.div`
-display: none;
-`
-
 let ErrorMessage = styled.h1`
 font-family: "Open Sans", sans-serif;
 color: rgb(96, 96, 96);
@@ -58,22 +54,17 @@ let ending: number = maxItems;
 let selectedProgramPosition: number = 0;
 let selectedProgramId: number = 0;
 
-export function Carosuel() {
+export default function Carosuel() {
     let programsValues: { programList: ProgramsInterface[]; status: String } = useSelector((state: RootState) => state.programs);
     let [currentPrograms, setPrograms] = useState<ProgramsInterface[]>();
     let [selectedProgram, changeSelectedProgram] = useState<Number>();
+    let navigate: NavigateFunction = useNavigate();
 
     useEffect(() => {
         changeSelectedProgram(selectedProgramPosition);
         let displayedPrograms = programsValues.programList.slice(beginning, ending);
         setPrograms(displayedPrograms);
     }, [programsValues]);
-
-    let navigate: NavigateFunction = useNavigate();
-    let routeChange = (routeId: number) => {
-        let path = `${routeId}`;
-        navigate(path);
-    }
 
     function error(): boolean {
         if (programsValues.status === "rejected") {
@@ -88,7 +79,9 @@ export function Carosuel() {
     }
 
     function setSkeletonItems() {
+        //console.log(programsValues.status);
         let skeletonItems: any[] = [];
+        skeletonItems.push(<div>Status: {programsValues.status}</div>)
         for (var i = 0; i < maxItems; i++) {
             skeletonItems.push(<SingleItemContainer> <SkeletonElement {...{ type: "program" } as any} /> </SingleItemContainer>)
         }
@@ -138,7 +131,7 @@ export function Carosuel() {
                 setPrograms(programsValues.programList.slice(beginning, ending));
                 break;
             case "Enter":
-                routeChange(selectedProgramId);
+                navigate(`${selectedProgramId}`);
                 break;
         }
     };
@@ -151,14 +144,9 @@ export function Carosuel() {
                         currentPrograms.map((program, index) =>
                             <SingleItemContainer> {
                                 selectedProgram === index ? (
-                                    <>
-                                        <SelectedProgram key={program.id} src={program.image} alt={program.title} /> 
-                                        <Hidden> {
-                                            selectedProgramId = program.id
-                                        } </Hidden>
-                                    </>
+                                    <SelectedProgram key={program.id} src={program.image} alt="Selected Image" onLoad={() => {selectedProgramId = program.id}} /> 
                                 ) : (
-                                    <NotSelectedProgram key={program.id} src={program.image} alt={program.title} />
+                                    <NotSelectedProgram key={program.id} src={program.image} alt="Program Image" />
                                 )}
                             </SingleItemContainer>
                         )
