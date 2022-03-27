@@ -3,7 +3,6 @@ import { Params, useParams } from "react-router-dom";
 import { useSelector } from 'react-redux'
 import { RootState } from "../../app/store";
 import { useNavigate } from "react-router-dom";
-import Header from '../../features/header/Header';
 import SkeletonElement from '../../skeletons/SkeletonElement';
 import { selectProgramById } from '../../features/programs/programsSlice'
 import styled from 'styled-components';
