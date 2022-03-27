@@ -1,12 +1,14 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route  } from "react-router-dom";
 import { getPrograms } from './features/programs/programsSlice';
+import Carosuel from './features/carosuel/Carosuel'
+import Header from './features/header/Header'
+import Program from './routes/program/Program'
 
 store.dispatch(getPrograms())
 
@@ -14,7 +16,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App/>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Carosuel />} />
+            <Route path=":id" element={<Program />} />
+          </Routes>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
