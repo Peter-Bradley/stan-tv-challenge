@@ -1,43 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-Getting started with application
+### Getting Started with Application
 - Get Latest Version of NodeJS
 - Get Lastest Version of Git
 - Open a Command Window
@@ -48,8 +11,30 @@ Getting started with application
 
 The application will now start a local instance of the application at [http://localhost:3000](http://localhost:3000)
 
-Technical Architecture Decisions
+### Running application unit tests
+- Open a Command Window
+- Enter into the application folder location
+- run `npm test` in the command window
 
-Additional Features Liked to Implement
+Launches the test runner in the interactive watch mode.
+
+### Building the application for production
+- Open a Command Window
+- Enter into the application folder location
+- run `npm run build` in the command window
+
+Builds the app for production to the `build` folder.
+
+### Technical and architecture decisions
+- I utilised Redux in addition to react to enable easy management of the application state
+- Styled Components allows for easier code to read, along with allowing minimizing code files for simpler maintenance
+- React Router allows for simple implementation of routing between pages, and would allow for more to be 
+
+### Improvements that I'd liked to implement
 - Selecting types of programs displayed via links on top of screen
+- Better CSS formatting for the program page
+- Better unit testing (Implement a mock store)
+- Change the build output file names to correctly align with the task file names
 
+### Things to do differently if more allocated time
+- Make use of preimplemented packages for the carosuel
