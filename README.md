@@ -27,14 +27,15 @@ Builds the app for production to the `build` folder.
 
 ### Technical and architecture decisions
 - I utilised Redux in addition to react to enable easy management of the application state
-- Styled Components allows for easier code to read, along with allowing minimizing code files for simpler maintenance
-- React Router allows for simple implementation of routing between pages, and would allow for more to be 
+- Styled Components was used in order to allow for easier code to read, along with allowing minimizing code files for simpler maintenance
+- React Router allows for simple implementation of naivgation between pages
 
 ### Improvements that I'd liked to implement
 - Selecting types of programs displayed via links on top of screen
-- Better CSS formatting for the program page
+- App Header doesn't overlap programs when making the screen very small
+- Better styled formatting for the program page and carosuel highlighting
 - Better unit testing (Implement a mock store)
 - Change the build output file names to correctly align with the task file names
 
 ### Things to do differently if more allocated time
-- Make use of preimplemented packages for the carosuel
+- Make use of preimplemented packages for the carosuel and skeletons
